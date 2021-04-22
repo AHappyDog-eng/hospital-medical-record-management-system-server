@@ -14,4 +14,11 @@ public enum  RoleEnum {
     this.power = power;
     this.remark = remark;
   }
+
+  public int getPower() {
+    return power;
+  }
+  public String getRemark(){
+    return remark;
+  }
 }
