@@ -25,6 +25,7 @@ public enum Status {
     USER_NOT_EXIST_ERROR(20007, "用户不存在"),
     USER_EXIST_ERROR(20007, "用户已存在"),
     USER_REGIST_FAILURE(20008,"用户注册失败"),
+    CASE_ALT_EXIST(20009,"此病例已经存在"),
     /**3xxxx 中间件领域错误*/
     /**30001-30100 ES*/
     NO_SUCH_INDEX_ERROR(30001, "索引未建立"),

@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 public class PatientVo {
-  //唯一标志
+  //唯一标志 采用身份证号
   private String id;
   private String patientName;
   private String age;
@@ -21,10 +21,4 @@ public class PatientVo {
   // 首次录入时间时间戳
   private Long firstTime;
 
-  // 生成用来生成外键
-  private String caseOfPatientId;
-
-  public void generateCaseOfPatientId() {
-    this.caseOfPatientId = Murmur.hash(this.patientName, tel, firstTime);
-  }
 }

@@ -6,17 +6,6 @@
         SELECT * FROM patient WHERE id = #{id}
     </select>
 
-    <!--    private String id;-->
-    <!--    private String patientName;-->
-    <!--    private String age;-->
-    <!--    private String sex;-->
-    <!--    private String height;-->
-    <!--    private String weight;-->
-    <!--    private String tel;-->
-    <!--    // 首次录入时间时间戳-->
-    <!--    private Long firstTime;-->
-    <!--    // 生成用来生成外键-->
-    <!--    private String caseOfPatientId;-->
     <insert id="add" parameterType="com.hospital.managementsystem.domin.vo.PatientVo">
     insert into patient (id,patientName,age,sex,height,weight,tel,firstTime,caseOfPatientId) values (#{id},#{patientName},#{age},#{sex},#{height},#{weight},#{tel},#{firstTime},#{caseOfPatientId})
     </insert>

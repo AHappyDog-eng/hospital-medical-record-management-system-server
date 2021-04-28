@@ -27,8 +27,6 @@ public class PatientServiceImpl implements PatientService {
     }
 
     patientVo.setFirstTime(System.currentTimeMillis());
-    patientVo.generateCaseOfPatientId();
-    patientVo.setId(patientVo.getTel());
     patientMapper.add(patientVo);
     return new Result(Status.SUCCESS);
   }
@@ -55,13 +53,12 @@ public class PatientServiceImpl implements PatientService {
       return new Result(Status.USER_NOT_EXIST_ERROR);
     }
     patientVo.setFirstTime(select.getFirstTime());
-    patientVo.setId(patientVo.getTel());
-    patientVo.generateCaseOfPatientId();
     patientMapper.update(patientVo);
     return new Result(Status.SUCCESS);
   }
 
   @Override
+
   public Result select(String id) {
     PatientVo patientVo = patientMapper.select(id);
     Result<PatientVo> result = new Result<>(Status.SUCCESS);

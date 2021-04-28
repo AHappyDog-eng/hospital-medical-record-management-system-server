@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hospital.managementsystem.mapper.CaseMapper">
+
+    <insert id="add" parameterType="com.hospital.managementsystem.domin.vo.CaseVo">
+    insert into caselist (personId,name,sex,age,interHospitalTime,subject,illness,nativePlace,tel) values (#{personId},#{name},#{sex},#{age},#{interHospitalTime},#{subject},#{illness},#{nativePlace},#{tel})
+    </insert>
+
+
+    <delete id="delete" parameterType="java.lang.Integer">
+    delete from caselist where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.hospital.managementsystem.domin.vo.CaseVo">
+    update caselist set personId=#{personId},name=#{name},sex=#{sex},age=#{age},subject=#{subject},illness=#{illness},nativePlace=#{nativePlace},tel=#{tel} where id = #{id}
+    </update>
+
+    <select id="select" parameterType="Integer" resultType="com.hospital.managementsystem.domin.vo.CaseVo">
+        SELECT * FROM caselist WHERE id=#{id}
+    </select>
+
+    <select id="listById" parameterType="String" resultType="com.hospital.managementsystem.domin.vo.CaseVo">
+        SELECT * FROM caselist WHERE personId=#{personId}
+    </select>
+    <select id="list" resultType="com.hospital.managementsystem.domin.vo.CaseVo">
+        SELECT  *FROM  caselist
+    </select>
+</mapper>
