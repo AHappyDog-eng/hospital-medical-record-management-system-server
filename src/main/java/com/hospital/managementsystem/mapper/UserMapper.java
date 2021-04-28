@@ -13,13 +13,13 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UserMapper {
-  Result register(User user);
+  void register(User user);
 
-  Result login(@Param("username") String username, @Param("password") String password);
+  User login(@Param("username") String username, @Param("password") String password);
 
-  Result update(@Param("oldPasswordc") String oldPassword, @Param("newPassword") String newPassword,@Param("username") String username);
+  void update(@Param("oldPassword") String oldPassword, @Param("newPassword") String newPassword, @Param("username") String username);
 
-  Result delete(String username);
+  void delete(String username);
 
   User findByUserName(String username);
 }

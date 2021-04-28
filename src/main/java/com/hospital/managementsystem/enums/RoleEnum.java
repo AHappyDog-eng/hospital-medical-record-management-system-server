@@ -5,7 +5,7 @@ package com.hospital.managementsystem.enums;
  * @date 2021/4/22 18:31
  */
 public enum  RoleEnum {
-  DOCTOR(1,"医生"),
+  DOCTOR(1,"doctor"),
   ADMIN(2,"admin");
   private int power;
   private String remark;
