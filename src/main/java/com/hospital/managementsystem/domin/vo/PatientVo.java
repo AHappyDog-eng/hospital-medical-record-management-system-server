@@ -25,6 +25,6 @@ public class PatientVo {
   private String caseOfPatientId;
 
   public void generateCaseOfPatientId() {
-    Murmur.hash(this.patientName, tel, firstTime);
+    this.caseOfPatientId = Murmur.hash(this.patientName, tel, firstTime);
   }
 }

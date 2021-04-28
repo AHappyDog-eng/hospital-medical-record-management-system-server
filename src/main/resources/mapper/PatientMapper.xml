@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hospital.managementsystem.mapper.PatientMapper">
+    <select id="select" parameterType="String" resultType="com.hospital.managementsystem.domin.vo.PatientVo">
+        SELECT * FROM patient WHERE id = #{id}
+    </select>
+
+    <!--    private String id;-->
+    <!--    private String patientName;-->
+    <!--    private String age;-->
+    <!--    private String sex;-->
+    <!--    private String height;-->
+    <!--    private String weight;-->
+    <!--    private String tel;-->
+    <!--    // 首次录入时间时间戳-->
+    <!--    private Long firstTime;-->
+    <!--    // 生成用来生成外键-->
+    <!--    private String caseOfPatientId;-->
+    <insert id="add" parameterType="com.hospital.managementsystem.domin.vo.PatientVo">
+    insert into patient (id,patientName,age,sex,height,weight,tel,firstTime,caseOfPatientId) values (#{id},#{patientName},#{age},#{sex},#{height},#{weight},#{tel},#{firstTime},#{caseOfPatientId})
+    </insert>
+
+    <delete id="delete" parameterType="String">
+    delete from patient where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.hospital.managementsystem.domin.vo.PatientVo">
+    update patient set patientName=#{patientName},age=#{age},sex=#{sex},height=#{height},weight=#{weight},firstTime=#{firstTime},caseOfPatientId=#{caseOfPatientId} where id = #{id}
+    </update>
+
+    <select id="list" resultType="com.hospital.managementsystem.domin.vo.PatientVo">
+        select * from patient
+    </select>
+
+
+</mapper>
