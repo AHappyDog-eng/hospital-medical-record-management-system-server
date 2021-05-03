@@ -19,22 +19,22 @@ public class UserController {
   @Autowired
   UserServiceImpl userService;
 
-  @RequestMapping("register")
+  @RequestMapping("/user/register")
   public Result register(@RequestBody User user) {
     return userService.register(user);
   }
 
-  @RequestMapping("/login")
+  @RequestMapping("/user/login")
   public Result login(@NotNull(message = "username 不能为空") String username,@NotNull(message = "password 不能为空") String password) {
     return userService.login(username, password);
   }
 
-  @RequestMapping("/delete")
+  @RequestMapping("/user/delete")
   public Result delete(String username) {
     return userService.delete(username);
   }
 
-  @RequestMapping("/update")
+  @RequestMapping("/user/update")
   public Result update(String oldPassword, String newPassword, String username) {
     return userService.update(oldPassword, newPassword, username);
   }
