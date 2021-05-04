@@ -20,4 +20,6 @@ public class User {
   private String role = RoleEnum.DOCTOR.getRemark();
 
   private int power = RoleEnum.DOCTOR.getPower();
+
+  private String headSculptureUrl;
 }

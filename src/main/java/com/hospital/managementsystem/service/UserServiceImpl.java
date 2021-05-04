@@ -1,13 +1,18 @@
 package com.hospital.managementsystem.service;
 
+import com.google.common.collect.Maps;
 import com.hospital.managementsystem.domin.User;
 import com.hospital.managementsystem.enums.RoleEnum;
 import com.hospital.managementsystem.enums.Status;
 import com.hospital.managementsystem.mapper.UserMapper;
+import com.hospital.managementsystem.utils.Murmur;
 import com.hospital.managementsystem.utils.Result;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.hospital.managementsystem.enums.Status.*;
 
@@ -19,6 +24,8 @@ import static com.hospital.managementsystem.enums.Status.*;
 public class UserServiceImpl implements UserService {
   @Autowired
   private UserMapper userMapper;
+  @Autowired
+  private Murmur murmur;
 
   @Override
   public Result register(User user) {
@@ -38,7 +45,14 @@ public class UserServiceImpl implements UserService {
   public Result login(String username, String password) {
     User login = userMapper.login(username, password);
     if (login != null) {
-      return new Result(SUCCESS);
+      User user = findByUserName(username);
+
+      Result<Map> result = new Result<>(SUCCESS);
+      HashMap<String, String> map = Maps.newHashMap();
+      map.put("token", murmur.hash(user.getId()));
+      map.put("headSculptureUrl", user.getHeadSculptureUrl());
+      result.setData(map);
+      return result;
     } else {
       return new Result(USERNAME_AND_PASSWORD_ERROR);
     }
