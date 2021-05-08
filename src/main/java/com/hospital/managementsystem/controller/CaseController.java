@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author ning.wang
  * @date 2021/4/29 1:04
@@ -40,12 +42,17 @@ public class CaseController {
   }
 
   @RequestMapping("/list")
-  public Result list() {
-    return caseService.list();
+  public Result list(Integer pageNum, Integer limit) {
+    return caseService.list(pageNum, limit);
   }
 
   @RequestMapping("/list/id")
-  public Result listId(String personId){
-    return caseService.listById(personId);
+  public Result listId(String personId, Integer pageNum, Integer limit) {
+    return caseService.listById(personId, pageNum, limit);
+  }
+
+  @RequestMapping("/delete/list")
+  public Result deleteList(@RequestBody List<String> ids) {
+    return caseService.deleteList(ids);
   }
 }

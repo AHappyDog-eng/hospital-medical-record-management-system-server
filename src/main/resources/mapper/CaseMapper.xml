@@ -26,4 +26,10 @@
     <select id="list" resultType="com.hospital.managementsystem.domin.vo.CaseVo">
         SELECT  *FROM  caselist
     </select>
+    <delete id="deleteList" parameterType="java.util.List">
+        delete from caselist where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

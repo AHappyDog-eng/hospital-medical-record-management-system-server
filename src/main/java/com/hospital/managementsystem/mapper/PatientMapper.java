@@ -22,4 +22,6 @@ public interface PatientMapper {
   PatientVo select(String id);
 
   List<PatientVo> list();
+
+  void deleteList(List ids);
 }

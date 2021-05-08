@@ -18,9 +18,9 @@ public interface CaseService {
 
   Result<CaseVo> select(Integer id);
 
-  Result<List<CaseVo>> list();
+  Result<List<CaseVo>> list(Integer pageNum,Integer limit);
 
-  Result<List<CaseVo>> listById(String personId);
+  Result<List<CaseVo>> listById(String personId,Integer pageNum,Integer limit);
 
-
+  Result deleteList(List ids);
 }

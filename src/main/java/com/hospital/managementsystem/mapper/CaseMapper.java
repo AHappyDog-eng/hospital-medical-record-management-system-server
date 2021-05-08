@@ -25,4 +25,6 @@ public interface CaseMapper {
   List<CaseVo> list();
 
   List<CaseVo> listById(String personId);
+
+  void deleteList(List ids);
 }

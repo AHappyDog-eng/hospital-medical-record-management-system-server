@@ -18,5 +18,7 @@ public interface PatientService {
 
   Result select(String id);
 
-  Result<List<PatientVo>> list();
+  Result<List<PatientVo>> list(Integer pageNum,Integer limit);
+
+  Result deleteList(List ids);
 }

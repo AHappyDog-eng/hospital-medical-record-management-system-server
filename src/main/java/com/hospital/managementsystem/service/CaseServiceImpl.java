@@ -1,5 +1,7 @@
 package com.hospital.managementsystem.service;
 
+import com.github.pagehelper.PageHelper;
+import com.hospital.managementsystem.common.Constants;
 import com.hospital.managementsystem.domin.vo.CaseVo;
 import com.hospital.managementsystem.enums.Status;
 import com.hospital.managementsystem.mapper.CaseMapper;
@@ -51,7 +53,14 @@ public class CaseServiceImpl implements CaseService {
   }
 
   @Override
-  public Result<List<CaseVo>> list() {
+  public Result<List<CaseVo>> list(Integer pageNum,Integer limit) {
+    if (pageNum <= 0) {
+      pageNum = Constants.DEFAULT_PAGE_NUM;
+    }
+    if (limit <= 1) {
+      limit = Constants.DEFAULT_PAGE_SIZE;
+    }
+    PageHelper.startPage(pageNum, limit);
     List<CaseVo> list = caseMapper.list();
     Result<List<CaseVo>> result = new Result<>(Status.SUCCESS);
     result.setData(list);
@@ -59,10 +68,24 @@ public class CaseServiceImpl implements CaseService {
   }
 
   @Override
-  public Result<List<CaseVo>> listById(String personId) {
+  public Result<List<CaseVo>> listById(String personId,Integer pageNum,Integer limit) {
+    if (pageNum <= 0) {
+      pageNum = Constants.DEFAULT_PAGE_NUM;
+    }
+    if (limit <= 1) {
+      limit = Constants.DEFAULT_PAGE_SIZE;
+    }
+    PageHelper.startPage(pageNum, limit);
     List<CaseVo> caseVos = caseMapper.listById(personId);
     Result<List<CaseVo>> result = new Result<>(Status.SUCCESS);
     result.setData(caseVos);
     return result;
+  }
+
+  @Override
+  public Result deleteList(List ids) {
+    if (ids.size()<=0) return new Result(Status.SUCCESS);
+    caseMapper.deleteList(ids);
+    return new Result(Status.SUCCESS);
   }
 }

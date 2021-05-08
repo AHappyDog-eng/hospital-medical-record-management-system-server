@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author ning.wang
  * @date 2021/4/28 21:11
@@ -39,7 +41,12 @@ public class PatientController {
   }
 
   @RequestMapping("/list")
-  public Result list() {
-    return service.list();
+  public Result list(Integer pageNum, Integer limit) {
+    return service.list(pageNum, limit);
+  }
+
+  @RequestMapping("/delete/list")
+  public Result deleteList(@RequestBody List<String> ids) {
+    return service.deleteList(ids);
   }
 }

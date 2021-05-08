@@ -7,7 +7,7 @@
     </select>
 
     <insert id="add" parameterType="com.hospital.managementsystem.domin.vo.PatientVo">
-    insert into patient (id,patientName,age,sex,height,weight,tel,firstTime,caseOfPatientId) values (#{id},#{patientName},#{age},#{sex},#{height},#{weight},#{tel},#{firstTime},#{caseOfPatientId})
+    insert into patient (id,patientName,age,sex,height,weight,tel,firstTime) values (#{id},#{patientName},#{age},#{sex},#{height},#{weight},#{tel},#{firstTime})
     </insert>
 
     <delete id="delete" parameterType="String">
@@ -21,6 +21,11 @@
     <select id="list" resultType="com.hospital.managementsystem.domin.vo.PatientVo">
         select * from patient
     </select>
-
+    <delete id="deleteList" parameterType="java.util.List">
+        delete from patient where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>
