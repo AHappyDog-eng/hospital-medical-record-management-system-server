@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
       Result<Map> result = new Result<>(SUCCESS);
       HashMap<String, String> map = Maps.newHashMap();
-      map.put("token", murmur.hash(user.getId()));
+      map.put("token", murmur.base64(username));
       map.put("headSculptureUrl", user.getHeadSculptureUrl());
       result.setData(map);
       return result;
@@ -79,5 +79,12 @@ public class UserServiceImpl implements UserService {
     return userMapper.findByUserName(username);
   }
 
+  public Result getUserByToken(String token) {
+    String username = murmur.decode(token);
+    User user = findByUserName(username);
+    Result<Object> result = new Result<>(SUCCESS);
+    result.setData(user);
+    return result;
+  }
 
 }

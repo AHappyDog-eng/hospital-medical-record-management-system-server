@@ -18,4 +18,5 @@ public interface UserService {
   Result delete(String username);
 
   User findByUserName(String username);
+
 }

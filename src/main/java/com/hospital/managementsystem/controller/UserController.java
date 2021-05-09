@@ -25,7 +25,7 @@ public class UserController {
   }
 
   @RequestMapping("/user/login")
-  public Result login(@NotNull(message = "username 不能为空") String username,@NotNull(message = "password 不能为空") String password) {
+  public Result login(@NotNull(message = "username 不能为空") String username, @NotNull(message = "password 不能为空") String password) {
     return userService.login(username, password);
   }
 
@@ -38,4 +38,10 @@ public class UserController {
   public Result update(String oldPassword, String newPassword, String username) {
     return userService.update(oldPassword, newPassword, username);
   }
+
+  @RequestMapping("/user/select/token")
+  public Result selectToken(String token) {
+    return userService.getUserByToken(token);
+  }
+
 }

@@ -17,27 +17,20 @@ public class Murmur {
   private static HashFunction function = Hashing.murmur3_128();
   private static Charset charset = Charset.forName("utf-8");
 
-  public  String hash(Object ...sources) {
+  public String hash(Object... sources) {
 
     String source = Joiner.on("-").join(sources);
     return function.newHasher().putString(source, charset).hash().toString();
   }
 
-  public  void base64(String str) {
+  public String base64(String str) {
     byte[] bytes = str.getBytes();
-
     //Base64 加密
-    String encoded = Base64.getEncoder().encodeToString(bytes);
-    System.out.println("Base 64 加密后：" + encoded);
+    return Base64.getEncoder().encodeToString(bytes);
+  }
 
-    //Base64 解密
-    byte[] decoded = Base64.getDecoder().decode(encoded);
-
-    String decodeStr = new String(decoded);
-    System.out.println("Base 64 解密后：" + decodeStr);
-
-    System.out.println();
-
-
+  public String decode(String token) {
+    byte[] decoded = Base64.getDecoder().decode(token);
+    return new String(decoded);
   }
 }
