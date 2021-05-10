@@ -6,9 +6,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://1.116.226.x:3306/hospital?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://1.116.226.8:3306/hospital?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
-    password: "@Abc123456x"
+    password: "@Abc1234567"
     type: com.alibaba.druid.pool.DruidDataSource
 
 mybatis:
