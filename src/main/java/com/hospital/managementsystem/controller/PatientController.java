@@ -1,5 +1,6 @@
 package com.hospital.managementsystem.controller;
 
+import com.hospital.managementsystem.domin.po.PatientPo;
 import com.hospital.managementsystem.domin.vo.PatientVo;
 import com.hospital.managementsystem.service.PatientServiceImpl;
 import com.hospital.managementsystem.utils.Result;
@@ -21,23 +22,23 @@ public class PatientController {
   private PatientServiceImpl service;
 
   @RequestMapping("/add")
-  public Result add(@RequestBody PatientVo patientVo) {
+  public Result add(@RequestBody PatientPo patientVo) {
     return service.add(patientVo);
   }
 
   @RequestMapping("/delete")
-  public Result delete(String id) {
+  public Result delete(Integer id) {
     return service.delete(id);
   }
 
   @RequestMapping("/update")
-  public Result update(@RequestBody PatientVo patientVo) {
+  public Result update(@RequestBody PatientPo patientVo) {
     return service.update(patientVo);
   }
 
   @RequestMapping("/select")
-  public Result select(String id) {
-    return service.select(id);
+  public Result select(String idNumber) {
+    return service.select(idNumber);
   }
 
   @RequestMapping("/list")

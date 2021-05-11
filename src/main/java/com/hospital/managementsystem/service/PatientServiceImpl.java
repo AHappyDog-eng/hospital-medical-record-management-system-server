@@ -2,6 +2,7 @@ package com.hospital.managementsystem.service;
 
 import com.github.pagehelper.PageHelper;
 import com.hospital.managementsystem.common.Constants;
+import com.hospital.managementsystem.domin.po.PatientPo;
 import com.hospital.managementsystem.domin.vo.PatientVo;
 import com.hospital.managementsystem.enums.Status;
 import com.hospital.managementsystem.mapper.PatientMapper;
@@ -22,13 +23,11 @@ public class PatientServiceImpl implements PatientService {
   PatientMapper patientMapper;
 
   @Override
-  public Result add(PatientVo patientVo) {
-    PatientVo select = patientMapper.select(patientVo.getTel());
+  public Result add(PatientPo patientVo) {
+    PatientPo select = patientMapper.select(patientVo.getIdNumber());
     if (select != null) {
       return new Result(Status.USER_EXIST_ERROR);
     }
-    patientVo.setId(patientVo.getTel());
-    patientVo.setFirstTime(System.currentTimeMillis());
     patientMapper.add(patientVo);
     return new Result(Status.SUCCESS);
   }
@@ -57,18 +56,17 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
-  public Result delete(String id) {
+  public Result delete(Integer id) {
     patientMapper.delete(id);
     return new Result(Status.SUCCESS);
   }
 
   @Override
-  public Result update(PatientVo patientVo) {
-    PatientVo select = patientMapper.select(patientVo.getTel());
+  public Result update(PatientPo patientVo) {
+    PatientPo select = patientMapper.select(patientVo.getIdNumber());
     if (select == null) {
       return new Result(Status.USER_NOT_EXIST_ERROR);
     }
-    patientVo.setFirstTime(select.getFirstTime());
     patientMapper.update(patientVo);
     return new Result(Status.SUCCESS);
   }
@@ -76,8 +74,8 @@ public class PatientServiceImpl implements PatientService {
   @Override
 
   public Result select(String id) {
-    PatientVo patientVo = patientMapper.select(id);
-    Result<PatientVo> result = new Result<>(Status.SUCCESS);
+    PatientPo patientVo = patientMapper.select(id);
+    Result<PatientPo> result = new Result<>(Status.SUCCESS);
     result.setData(patientVo);
     return result;
   }

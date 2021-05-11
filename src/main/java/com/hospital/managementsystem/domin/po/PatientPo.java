@@ -8,30 +8,23 @@ import lombok.Data;
  */
 @Data
 public class PatientPo {
-  /**病历号：medicalRecordId
-   姓名：name
+
+  /**姓名：name
    身份证号：IdNumber
    性别：sex
    年龄：age
-   就诊医生：visitingDoctor
-   病史：medicalHistory
-   症状：symptom
-   诊断结果：diagnosisResult
-   就诊日期：dateOfVisit
-   治疗建议：treatmentSuggestion
-   就诊地址：addressOfVisit
+   电话：telphone
+   现住址：currentAddress
+   状态：status
    */
-  public String medicalRecordId;
-  public String name;
-  // 主键
+  public String id;
   public String idNumber;
+  public String name;
   public String sex;
   public String age;
-  public String visitingDoctor;
-  public String medicalHistory;
-  public String symptom;
-  public String diagnosisResult;
-  public String dateOfVisit;
-  public String treatmentSuggestion;
-  public String addressOfVisit;
+  public String telPhone;
+  public String currentAddress;
+  public String status;
+
+
 }

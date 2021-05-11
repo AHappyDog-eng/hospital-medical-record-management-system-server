@@ -2,6 +2,7 @@ package com.hospital.managementsystem.service;
 
 import com.github.pagehelper.PageHelper;
 import com.hospital.managementsystem.common.Constants;
+import com.hospital.managementsystem.domin.po.CasePo;
 import com.hospital.managementsystem.domin.vo.CaseVo;
 import com.hospital.managementsystem.enums.Status;
 import com.hospital.managementsystem.mapper.CaseMapper;
@@ -22,12 +23,11 @@ public class CaseServiceImpl implements CaseService {
   CaseMapper caseMapper;
 
   @Override
-  public Result add(CaseVo caseVo) {
+  public Result add(CasePo caseVo) {
 //    CaseVo select = caseMapper.select(Integer.valueOf(caseVo.getId()));
 //    if (select != null) {
 //      return new Result(Status.CASE_ALT_EXIST);
 //    }
-    caseVo.setInterHospitalTime(String.valueOf(System.currentTimeMillis()));
     caseMapper.add(caseVo);
     return new Result(Status.SUCCESS);
   }
@@ -39,21 +39,21 @@ public class CaseServiceImpl implements CaseService {
   }
 
   @Override
-  public Result update(CaseVo caseVo) {
+  public Result update(CasePo caseVo) {
     caseMapper.update(caseVo);
     return new Result(Status.SUCCESS);
   }
 
   @Override
-  public Result<CaseVo> select(Integer id) {
-    CaseVo select = caseMapper.select(id);
-    Result<CaseVo> result = new Result<>(Status.SUCCESS);
+  public Result<CasePo> select(Integer id) {
+    CasePo select = caseMapper.select(id);
+    Result<CasePo> result = new Result<>(Status.SUCCESS);
     result.setData(select);
     return result;
   }
 
   @Override
-  public Result<List<CaseVo>> list(Integer pageNum,Integer limit) {
+  public Result<List<CasePo>> list(Integer pageNum,Integer limit) {
     if (pageNum <= 0) {
       pageNum = Constants.DEFAULT_PAGE_NUM;
     }
@@ -61,14 +61,14 @@ public class CaseServiceImpl implements CaseService {
       limit = Constants.DEFAULT_PAGE_SIZE;
     }
     PageHelper.startPage(pageNum, limit);
-    List<CaseVo> list = caseMapper.list();
-    Result<List<CaseVo>> result = new Result<>(Status.SUCCESS);
+    List<CasePo> list = caseMapper.list();
+    Result<List<CasePo>> result = new Result<>(Status.SUCCESS);
     result.setData(list);
     return result;
   }
 
   @Override
-  public Result<List<CaseVo>> listById(String personId,Integer pageNum,Integer limit) {
+  public Result<List<CasePo>> listById(String personId,Integer pageNum,Integer limit) {
     if (pageNum <= 0) {
       pageNum = Constants.DEFAULT_PAGE_NUM;
     }
@@ -76,8 +76,8 @@ public class CaseServiceImpl implements CaseService {
       limit = Constants.DEFAULT_PAGE_SIZE;
     }
     PageHelper.startPage(pageNum, limit);
-    List<CaseVo> caseVos = caseMapper.listById(personId);
-    Result<List<CaseVo>> result = new Result<>(Status.SUCCESS);
+    List<CasePo> caseVos = caseMapper.listById(personId);
+    Result<List<CasePo>> result = new Result<>(Status.SUCCESS);
     result.setData(caseVos);
     return result;
   }

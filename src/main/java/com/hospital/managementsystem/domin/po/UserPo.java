@@ -8,7 +8,10 @@ import lombok.Data;
  */
 @Data
 public class UserPo {
+  // 医生编号
   public String number;
+  public String username;
+  public String password;
   public String name;
   public String sex;
   public String age;

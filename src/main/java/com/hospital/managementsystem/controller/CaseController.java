@@ -1,5 +1,6 @@
 package com.hospital.managementsystem.controller;
 
+import com.hospital.managementsystem.domin.po.CasePo;
 import com.hospital.managementsystem.domin.vo.CaseVo;
 import com.hospital.managementsystem.service.CaseServiceImpl;
 import com.hospital.managementsystem.utils.Result;
@@ -22,7 +23,7 @@ public class CaseController {
   private CaseServiceImpl caseService;
 
   @RequestMapping("/add")
-  public Result add(@RequestBody CaseVo caseVo) {
+  public Result add(@RequestBody CasePo caseVo) {
     return caseService.add(caseVo);
   }
 
@@ -32,7 +33,7 @@ public class CaseController {
   }
 
   @RequestMapping("/update")
-  public Result update(@RequestBody CaseVo caseVo) {
+  public Result update(@RequestBody CasePo caseVo) {
     return caseService.update(caseVo);
   }
 

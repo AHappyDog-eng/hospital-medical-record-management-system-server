@@ -1,5 +1,6 @@
 package com.hospital.managementsystem.service;
 
+import com.hospital.managementsystem.domin.po.CasePo;
 import com.hospital.managementsystem.domin.vo.CaseVo;
 import com.hospital.managementsystem.utils.Result;
 
@@ -10,17 +11,17 @@ import java.util.List;
  * @date 2021/4/29 0:52
  */
 public interface CaseService {
-  Result add(CaseVo caseVo);
+  Result add(CasePo caseVo);
 
   Result delete(Integer id);
 
-  Result update(CaseVo caseVo);
+  Result update(CasePo caseVo);
 
-  Result<CaseVo> select(Integer id);
+  Result<CasePo> select(Integer id);
 
-  Result<List<CaseVo>> list(Integer pageNum,Integer limit);
+  Result<List<CasePo>> list(Integer pageNum,Integer limit);
 
-  Result<List<CaseVo>> listById(String personId,Integer pageNum,Integer limit);
+  Result<List<CasePo>> listById(String personId,Integer pageNum,Integer limit);
 
   Result deleteList(List ids);
 }

@@ -1,5 +1,6 @@
 package com.hospital.managementsystem.mapper;
 
+import com.hospital.managementsystem.domin.po.CasePo;
 import com.hospital.managementsystem.domin.vo.CaseVo;
 import com.hospital.managementsystem.domin.vo.PatientVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,17 +15,17 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CaseMapper {
-  void add(CaseVo caseVo);
+  void add(CasePo caseVo);
 
   void delete(Integer id);
 
-  void update(CaseVo caseVo);
+  void update(CasePo caseVo);
 
-  CaseVo select(Integer id);
+  CasePo select(Integer id);
 
-  List<CaseVo> list();
+  List<CasePo> list();
 
-  List<CaseVo> listById(String personId);
+  List<CasePo> listById(String idNumber);
 
   void deleteList(List ids);
 }

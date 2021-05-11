@@ -2,30 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hospital.managementsystem.mapper.PatientMapper">
-    <select id="select" parameterType="String" resultType="com.hospital.managementsystem.domin.vo.PatientVo">
-        SELECT * FROM patient WHERE id = #{id}
-    </select>
 
-    <insert id="add" parameterType="com.hospital.managementsystem.domin.vo.PatientVo">
-    insert into patient (id,patientName,age,sex,height,weight,tel,firstTime) values (#{id},#{patientName},#{age},#{sex},#{height},#{weight},#{tel},#{firstTime})
+    <insert id="add" parameterType="com.hospital.managementsystem.domin.po.PatientPo">
+    insert into patientsec (idNumber,name,sex,age,telPhone,currentAddress,status) values (#{idNumber},#{name},#{sex},#{age},#{telPhone},#{currentAddress},#{status})
     </insert>
 
-    <delete id="delete" parameterType="String">
-    delete from patient where id = #{id}
+    <delete id="delete" parameterType="java.lang.Integer">
+    delete from patientsec where id = #{id}
     </delete>
 
-    <update id="update" parameterType="com.hospital.managementsystem.domin.vo.PatientVo">
-    update patient set patientName=#{patientName},age=#{age},sex=#{sex},height=#{height},weight=#{weight},firstTime=#{firstTime},caseOfPatientId=#{caseOfPatientId} where id = #{id}
+    <update id="update" parameterType="com.hospital.managementsystem.domin.po.PatientPo">
+    update patientsec set name=#{name},sex=#{sex},age=#{age},telPhone=#{telPhone},currentAddress=#{currentAddress},status=#{status} where id = #{id}
     </update>
 
-    <select id="list" resultType="com.hospital.managementsystem.domin.vo.PatientVo">
-        select * from patient
+    <select id="select" parameterType="String" resultType="com.hospital.managementsystem.domin.po.PatientPo">
+        SELECT * FROM patientsec WHERE idNumber=#{idNumber}
+    </select>
+
+    <select id="list" resultType="com.hospital.managementsystem.domin.po.PatientPo">
+        SELECT  *FROM  patientsec
     </select>
     <delete id="deleteList" parameterType="java.util.List">
-        delete from patient where id in
+        delete from patientsec where id in
         <foreach collection="list" item="id" open="(" close=")" separator=",">
             #{id}
         </foreach>
     </delete>
-
 </mapper>

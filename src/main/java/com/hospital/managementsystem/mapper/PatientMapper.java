@@ -1,5 +1,6 @@
 package com.hospital.managementsystem.mapper;
 
+import com.hospital.managementsystem.domin.po.PatientPo;
 import com.hospital.managementsystem.domin.vo.PatientVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -13,13 +14,13 @@ import java.util.List;
 @Mapper
 @Repository
 public interface PatientMapper {
-  void add(PatientVo patientVo);
+  void add(PatientPo patientVo);
 
-  void delete(String id);
+  void delete(Integer id);
 
-  void update(PatientVo patientVo);
+  void update(PatientPo patientVo);
 
-  PatientVo select(String id);
+  PatientPo select(String idNumber);
 
   List<PatientVo> list();
 
