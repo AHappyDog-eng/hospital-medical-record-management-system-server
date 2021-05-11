@@ -48,8 +48,8 @@ public class CaseController {
   }
 
   @RequestMapping("/list/id")
-  public Result listId(String personId, Integer pageNum, Integer limit) {
-    return caseService.listById(personId, pageNum, limit);
+  public Result listId(String idNumber, Integer pageNum, Integer limit) {
+    return caseService.listById(idNumber, pageNum, limit);
   }
 
   @RequestMapping("/delete/list")
