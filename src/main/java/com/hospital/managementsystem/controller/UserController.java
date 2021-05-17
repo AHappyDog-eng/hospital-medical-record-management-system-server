@@ -25,8 +25,8 @@ public class UserController {
   }
 
   @RequestMapping("/user/login")
-  public Result login(@NotNull(message = "username 不能为空") String username, @NotNull(message = "password 不能为空") String password) {
-    return userService.login(username, password);
+  public Result login(@RequestBody User user) {
+    return userService.login(user.getUsername(), user.getPassword());
   }
 
   @RequestMapping("/user/delete")

@@ -22,4 +22,6 @@ public class User {
   private int power = RoleEnum.DOCTOR.getPower();
 
   private String headSculptureUrl;
+
+  private String numberId;
 }

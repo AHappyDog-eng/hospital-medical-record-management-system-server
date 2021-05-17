@@ -11,7 +11,7 @@
     </select>
 
     <insert id="register" parameterType="com.hospital.managementsystem.domin.User">
-    insert into user (username,password,role,power,headSculptureUrl) values (#{username},#{password},#{role},#{power},#{headSculptureUrl})
+    insert into user (username,password,role,power,headSculptureUrl,numberId) values (#{username},#{password},#{role},#{power},#{headSculptureUrl},#{numberId})
     </insert>
 
     <delete id="delete" parameterType="String">
