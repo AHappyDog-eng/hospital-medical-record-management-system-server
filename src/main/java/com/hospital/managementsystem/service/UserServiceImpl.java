@@ -1,7 +1,11 @@
 package com.hospital.managementsystem.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
+import com.hospital.managementsystem.common.Constants;
 import com.hospital.managementsystem.domin.User;
+import com.hospital.managementsystem.domin.po.CasePo;
 import com.hospital.managementsystem.enums.RoleEnum;
 import com.hospital.managementsystem.enums.Status;
 import com.hospital.managementsystem.mapper.UserMapper;
@@ -12,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.hospital.managementsystem.enums.Status.*;
@@ -77,6 +82,26 @@ public class UserServiceImpl implements UserService {
   @Override
   public User findByUserName(String username) {
     return userMapper.findByUserName(username);
+  }
+
+  @Override
+  public Result list(Integer pageNum,Integer limit) {
+    if (pageNum <= 0) {
+      pageNum = Constants.DEFAULT_PAGE_NUM;
+    }
+    if (limit <= 1) {
+      limit = Constants.DEFAULT_PAGE_SIZE;
+    }
+    PageHelper.startPage(pageNum, limit);
+    List<User> list = userMapper.list();
+    PageInfo<User> pageInfo = new PageInfo<>(list);
+    long total = pageInfo.getTotal();
+    Result<Map<String,Object>> result = new Result<>(Status.SUCCESS);
+    HashMap<String, Object> hashMap = Maps.newHashMap();
+    hashMap.put("result",list);
+    hashMap.put("totals",total);
+    result.setData(hashMap);
+    return result;
   }
 
   public Result getUserByToken(String token) {

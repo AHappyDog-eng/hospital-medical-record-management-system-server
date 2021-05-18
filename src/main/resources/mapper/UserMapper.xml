@@ -30,4 +30,7 @@
         SELECT * FROM user WHERE username=#{username}
     </select>
 
+    <select id="list" resultType="com.hospital.managementsystem.domin.User">
+        SELECT * FROM user
+    </select>
 </mapper>

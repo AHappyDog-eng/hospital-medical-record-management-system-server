@@ -52,4 +52,9 @@ public class DepartmentController {
   public Result deleteList(@RequestBody List<String> ids) {
     return departmentService.deleteList(ids);
   }
+
+  @RequestMapping("/select/name")
+  public Result selectName(String departmentName) {
+    return departmentService.selectByName(departmentName);
+  }
 }

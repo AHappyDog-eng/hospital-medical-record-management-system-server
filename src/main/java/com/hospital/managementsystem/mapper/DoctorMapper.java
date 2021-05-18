@@ -3,7 +3,9 @@ package com.hospital.managementsystem.mapper;
 import com.hospital.managementsystem.domin.po.CasePo;
 import com.hospital.managementsystem.domin.po.DepartmentPo;
 import com.hospital.managementsystem.domin.po.DoctorPo;
+import com.hospital.managementsystem.utils.Result;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,4 +31,6 @@ public interface DoctorMapper {
   List<DoctorPo> listById(String departmentId);
 
   void deleteList(List ids);
+
+  DoctorPo getDoctorByNameAndDep(@Param("name") String name, @Param("department") String department);
 }

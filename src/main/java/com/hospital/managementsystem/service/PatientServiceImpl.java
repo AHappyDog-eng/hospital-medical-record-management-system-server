@@ -1,7 +1,10 @@
 package com.hospital.managementsystem.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Maps;
 import com.hospital.managementsystem.common.Constants;
+import com.hospital.managementsystem.domin.po.DoctorPo;
 import com.hospital.managementsystem.domin.po.PatientPo;
 import com.hospital.managementsystem.domin.vo.PatientVo;
 import com.hospital.managementsystem.enums.Status;
@@ -10,7 +13,9 @@ import com.hospital.managementsystem.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ning.wang
@@ -34,7 +39,7 @@ public class PatientServiceImpl implements PatientService {
 
 
   @Override
-  public Result<List<PatientVo>> list(Integer pageNum, Integer limit) {
+  public Result<Map<String,Object>> list(Integer pageNum, Integer limit) {
     if (pageNum <= 0) {
       pageNum = Constants.DEFAULT_PAGE_NUM;
     }
@@ -43,8 +48,13 @@ public class PatientServiceImpl implements PatientService {
     }
     PageHelper.startPage(pageNum, limit);
     List<PatientVo> list = patientMapper.list();
-    Result<List<PatientVo>> result = new Result<>(Status.SUCCESS);
-    result.setData(list);
+    PageInfo<PatientVo> pageInfo = new PageInfo<>(list);
+    long total = pageInfo.getTotal();
+    Result<Map<String,Object>> result = new Result<>(Status.SUCCESS);
+    HashMap<String, Object> hashMap = Maps.newHashMap();
+    hashMap.put("result",list);
+    hashMap.put("totals",total);
+    result.setData(hashMap);
     return result;
   }
 

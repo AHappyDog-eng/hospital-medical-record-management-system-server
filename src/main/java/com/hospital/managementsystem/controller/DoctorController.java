@@ -55,4 +55,9 @@ public class DoctorController {
   public Result deleteList(@RequestBody List<String> ids) {
     return doctorService.deleteList(ids);
   }
+
+  @RequestMapping("/select/query/params")
+  public Result selectQueryParams(String name, String department) {
+    return doctorService.getDoctorByNameAndDep(name, department);
+  }
 }

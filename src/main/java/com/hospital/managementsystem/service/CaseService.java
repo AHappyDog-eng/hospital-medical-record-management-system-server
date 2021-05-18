@@ -5,6 +5,7 @@ import com.hospital.managementsystem.domin.vo.CaseVo;
 import com.hospital.managementsystem.utils.Result;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ning.wang
@@ -19,9 +20,9 @@ public interface CaseService {
 
   Result<CasePo> select(Integer id);
 
-  Result<List<CasePo>> list(Integer pageNum,Integer limit);
+  Result<Map<String,Object>> list(Integer pageNum, Integer limit);
 
-  Result<List<CasePo>> listById(String personId,Integer pageNum,Integer limit);
+  Result<Map<String,Object>> listById(String personId,Integer pageNum,Integer limit);
 
   Result deleteList(List ids);
 }

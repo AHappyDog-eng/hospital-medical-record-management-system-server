@@ -27,4 +27,6 @@ public interface DepartmentMapper {
   List<DepartmentPo> listById(String idNumber);
 
   void deleteList(List ids);
+
+  DepartmentPo selectByName(String departmentName);
 }

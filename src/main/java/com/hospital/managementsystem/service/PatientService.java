@@ -5,6 +5,7 @@ import com.hospital.managementsystem.domin.vo.PatientVo;
 import com.hospital.managementsystem.utils.Result;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ning.wang
@@ -19,7 +20,7 @@ public interface PatientService {
 
   Result select(String id);
 
-  Result<List<PatientVo>> list(Integer pageNum,Integer limit);
+  Result<Map<String,Object>> list(Integer pageNum, Integer limit);
 
   Result deleteList(List ids);
 }

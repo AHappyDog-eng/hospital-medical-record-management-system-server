@@ -44,4 +44,9 @@ public class UserController {
     return userService.getUserByToken(token);
   }
 
+  @RequestMapping("/user/list")
+  public Result list(Integer pageNum,Integer limit){
+    Result list = userService.list(pageNum, limit);
+    return list;
+  }
 }

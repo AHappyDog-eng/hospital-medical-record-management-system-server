@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author ning.wang
  * @date 2021/4/22 18:54
@@ -22,4 +24,6 @@ public interface UserMapper {
   void delete(String username);
 
   User findByUserName(String username);
+
+  List<User> list();
 }

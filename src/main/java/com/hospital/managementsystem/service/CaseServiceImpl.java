@@ -1,6 +1,8 @@
 package com.hospital.managementsystem.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Maps;
 import com.hospital.managementsystem.common.Constants;
 import com.hospital.managementsystem.domin.po.CasePo;
 import com.hospital.managementsystem.domin.vo.CaseVo;
@@ -10,7 +12,9 @@ import com.hospital.managementsystem.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ning.wang
@@ -53,7 +57,7 @@ public class CaseServiceImpl implements CaseService {
   }
 
   @Override
-  public Result<List<CasePo>> list(Integer pageNum,Integer limit) {
+  public Result<Map<String,Object>> list(Integer pageNum, Integer limit) {
     if (pageNum <= 0) {
       pageNum = Constants.DEFAULT_PAGE_NUM;
     }
@@ -61,14 +65,20 @@ public class CaseServiceImpl implements CaseService {
       limit = Constants.DEFAULT_PAGE_SIZE;
     }
     PageHelper.startPage(pageNum, limit);
+
     List<CasePo> list = caseMapper.list();
-    Result<List<CasePo>> result = new Result<>(Status.SUCCESS);
-    result.setData(list);
+    PageInfo<CasePo> pageInfo = new PageInfo<>(list);
+    long total = pageInfo.getTotal();
+    Result<Map<String,Object>> result = new Result<>(Status.SUCCESS);
+    HashMap<String, Object> hashMap = Maps.newHashMap();
+    hashMap.put("result",list);
+    hashMap.put("totals",total);
+    result.setData(hashMap);
     return result;
   }
 
   @Override
-  public Result<List<CasePo>> listById(String personId,Integer pageNum,Integer limit) {
+  public Result<Map<String,Object>> listById(String personId,Integer pageNum,Integer limit) {
     if (pageNum <= 0) {
       pageNum = Constants.DEFAULT_PAGE_NUM;
     }
@@ -77,8 +87,13 @@ public class CaseServiceImpl implements CaseService {
     }
     PageHelper.startPage(pageNum, limit);
     List<CasePo> caseVos = caseMapper.listById(personId);
-    Result<List<CasePo>> result = new Result<>(Status.SUCCESS);
-    result.setData(caseVos);
+    PageInfo<CasePo> pageInfo = new PageInfo<>(caseVos);
+    long total = pageInfo.getTotal();
+    Result<Map<String,Object>> result = new Result<>(Status.SUCCESS);
+    HashMap<String, Object> hashMap = Maps.newHashMap();
+    hashMap.put("result",caseVos);
+    hashMap.put("totals",total);
+    result.setData(hashMap);
     return result;
   }
 

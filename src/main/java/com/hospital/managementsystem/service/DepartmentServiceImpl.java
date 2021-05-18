@@ -1,6 +1,8 @@
 package com.hospital.managementsystem.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Maps;
 import com.hospital.managementsystem.common.Constants;
 import com.hospital.managementsystem.domin.po.CasePo;
 import com.hospital.managementsystem.domin.po.DepartmentPo;
@@ -11,7 +13,9 @@ import com.hospital.managementsystem.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -56,7 +60,7 @@ public class DepartmentServiceImpl implements DepartmentService {
   }
 
   @Override
-  public Result<List<DepartmentPo>> list(Integer pageNum, Integer limit) {
+  public Result<Map<String,Object>> list(Integer pageNum, Integer limit) {
     if (pageNum <= 0) {
       pageNum = Constants.DEFAULT_PAGE_NUM;
     }
@@ -65,13 +69,18 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
     PageHelper.startPage(pageNum, limit);
     List<DepartmentPo> list = departmentMapper.list();
-    Result<List<DepartmentPo>> result = new Result<>(Status.SUCCESS);
-    result.setData(list);
+    PageInfo<DepartmentPo> pageInfo = new PageInfo<>(list);
+    long total = pageInfo.getTotal();
+    Result<Map<String,Object>> result = new Result<>(Status.SUCCESS);
+    HashMap<String, Object> hashMap = Maps.newHashMap();
+    hashMap.put("result",list);
+    hashMap.put("totals",total);
+    result.setData(hashMap);
     return result;
   }
 
   @Override
-  public Result<List<DepartmentPo>> listById(String personId, Integer pageNum, Integer limit) {
+  public Result<Map<String,Object>> listById(String personId, Integer pageNum, Integer limit) {
     if (pageNum <= 0) {
       pageNum = Constants.DEFAULT_PAGE_NUM;
     }
@@ -80,8 +89,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
     PageHelper.startPage(pageNum, limit);
     List<DepartmentPo> caseVos = departmentMapper.listById(personId);
-    Result<List<DepartmentPo>> result = new Result<>(Status.SUCCESS);
-    result.setData(caseVos);
+    PageInfo<DepartmentPo> pageInfo = new PageInfo<>(caseVos);
+    long total = pageInfo.getTotal();
+    Result<Map<String,Object>> result = new Result<>(Status.SUCCESS);
+    HashMap<String, Object> hashMap = Maps.newHashMap();
+    hashMap.put("result",caseVos);
+    hashMap.put("totals",total);
+    result.setData(hashMap);
     return result;
   }
 
@@ -90,5 +104,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     if (ids.size() <= 0) return new Result(Status.SUCCESS);
     departmentMapper.deleteList(ids);
     return new Result(Status.SUCCESS);
+  }
+
+  @Override
+  public Result selectByName(String departmentName) {
+    DepartmentPo departmentPo = departmentMapper.selectByName(departmentName);
+    Result<Object> result = new Result<>(Status.SUCCESS);
+    result.setData(departmentPo);
+    return result;
   }
 }

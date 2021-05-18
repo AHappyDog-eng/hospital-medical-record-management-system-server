@@ -33,5 +33,7 @@
             #{id}
         </foreach>
     </delete>
-
+    <select id="selectByName" parameterType="java.lang.String" resultType="com.hospital.managementsystem.domin.po.DepartmentPo">
+        select *from department where departmentName=#{departmentName}
+    </select>
 </mapper>

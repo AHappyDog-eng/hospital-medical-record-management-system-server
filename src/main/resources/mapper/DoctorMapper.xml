@@ -44,4 +44,8 @@
         </foreach>
     </delete>
 
+    <select id="getDoctorByNameAndDep" parameterType="java.lang.String" resultType="com.hospital.managementsystem.domin.po.DoctorPo">
+        select * from doctor where name=#{name} AND department=#{department}
+    </select>
+
 </mapper>
